@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment } from '../../environments/environment';
 import{Users} from "../users"
-import { reject } from 'q';
-import { resolve } from 'url';
+
 
 @Injectable({
   providedIn: 'root'

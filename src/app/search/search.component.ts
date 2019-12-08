@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import{Users} from "../users"
+import{GithubRequestService} from "../github-service/github-request.service"
+
 
 
 @Component({
@@ -10,9 +11,13 @@ import{Users} from "../users"
 })
 export class SearchComponent implements OnInit {
 users:Users
-  constructor(private http:HttpClient) { }
+  constructor(private githubService:GithubRequestService) {
+    this.githubService=githubService;
+   }
 
   ngOnInit() {
+    this.users=this.githubService.users
+    // this.githubService.gitHubRequest()
     
     }
 
