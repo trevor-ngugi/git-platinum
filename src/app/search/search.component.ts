@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{Users} from "../users"
+import{Users} from "../user-class/users"
 import{GithubRequestService} from "../github-service/github-request.service"
 
 
