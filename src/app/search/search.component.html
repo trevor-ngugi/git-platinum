@@ -3,7 +3,7 @@
 <div class="container">
   <form #searchField="ngForm" (ngSubmit)='searchUser()' >
     <div class="form-group" style="display: flex">
-      <input [(ngModel)]="username" #user="ngModel" type="text" placeholder="search github username" name="username"
+      <input [(ngModel)]="users" #user="ngModel" type="text" placeholder="search github username" name="username"
         class="form-control" id="username" style="border-right-style: none; border-radius: 0; border-color: #000" required>
       <button (click)="searchUser()" type="submit" class="btn btn-outline-dark btn-hov"
         style="border-left-style: none; border-radius: 0"><i class="fas fa-search" style="color: #000"></i></button>

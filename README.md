@@ -10,7 +10,7 @@ this is a web application that uses  github api to show github users profile and
 
 ## Demo
 
-here is a live working demo :[https://trevor-ngugi.github.io/quotes-website-2/]
+here is a live working demo :[https://trevor-ngugi.github.io/git-platinum/]
 <img src="src/assests/web.png">
 
 ## Features
