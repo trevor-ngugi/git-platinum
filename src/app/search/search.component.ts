@@ -15,6 +15,10 @@ users:Users
     this.githubService=githubService;
    }
 
+   searchUser(){
+     this.githubService.gitHubRequest()
+   }
+
   ngOnInit() {
     this.users=this.githubService.users
     // this.githubService.gitHubRequest()
