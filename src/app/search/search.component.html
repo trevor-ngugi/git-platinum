@@ -37,7 +37,7 @@
                   <p *ngIf="userProfile.bio" class="card-text"><span class="text-muted">Bio:</span> {{ users.bio }}
                   </p>
                   <p class="card-text"><span class="text-muted">Member since:</span>
-                    <!-- {{ userProfile.created_at | dateAgo }}</p> -->
+                    {{ userProfile.created_at | datePassed }}</p>
                   <p *ngIf="userProfile.location" class="card-text"><i class="fas fa-map-marker-alt"></i>
                     {{ users.location }}</p>
                   <p *ngIf="userProfile.blog" class="card-text"><i class="fas fa-link"></i><a

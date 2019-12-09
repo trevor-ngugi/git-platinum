@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { DatePassedPipe } from './date-passed.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SearchComponent,
-    UserPageComponent
+    UserPageComponent,
+    DatePassedPipe
   ],
   imports: [
     BrowserModule,
