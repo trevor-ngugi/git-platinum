@@ -1,10 +1,10 @@
 
 <ng-progress></ng-progress>
 <div class="container">
-  <form #searchField="ngForm">
+  <form #searchField="ngForm" (ngSubmit)='searchUser()' >
     <div class="form-group" style="display: flex">
-      <input [(ngModel)]="username" #user="ngModel" type="search" placeholder="search github username" name="username"
-        class="form-control" style="border-right-style: none; border-radius: 0; border-color: #000" required>
+      <input [(ngModel)]="username" #user="ngModel" type="text" placeholder="search github username" name="username"
+        class="form-control" id="username" style="border-right-style: none; border-radius: 0; border-color: #000" required>
       <button (click)="searchUser()" type="submit" class="btn btn-outline-dark btn-hov"
         style="border-left-style: none; border-radius: 0"><i class="fas fa-search" style="color: #000"></i></button>
     </div>
@@ -13,13 +13,13 @@
   </form>
 </div>
 <hr class="style-one">
-<div *ngIf="notFound && !userProfile" class="mx-auto">
+<!-- <div *ngIf="notFound && !userProfile" class="mx-auto">
   <img src="assest/error.png" alt="" class="mx-auto" height="120" width="120">
   <h2 class="text-center">sorry, user not found <i class="far fa-frown fa-lg"></i></h2>
-</div>
+</div> -->
 <div class="row">
   <div class="col-lg-6">
-    <div *ngIf="userProfile">
+    <div *ngIf="users">
       <h2>Profile</h2>
       <div class="card no-border mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
@@ -28,20 +28,20 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{ users.name }} <a class="redirect" href="{{ users.html_url }}" target="_blank"><i
+              <h5 class="card-title">{{ users.login}} <a class="redirect"  target="_blank"><i
                     class="fab fa-github"></i></a></h5>
               <p class="card-text"><span class="text-muted">Username:</span> {{ users.login }}</p>
-              <p *ngIf="userProfile.bio" class="card-text"><span class="text-muted">Bio:</span> {{ users.bio }}
+              <p *ngIf="users.bio" class="card-text"><span class="text-muted">Bio:</span> {{ users.bio }}
               </p>
               <p class="card-text"><span class="text-muted">Member since:</span>
-                {{ userProfile.created_at | datePassed }}</p>
-              <p *ngIf="userProfile.location" class="card-text"><i class="fas fa-map-marker-alt"></i>
+                {{ users.created_at | datePassed }}</p>
+              <p *ngIf="users.location" class="card-text"><i class="fas fa-map-marker-alt"></i>
                 {{ users.location }}</p>
-              <p *ngIf="userProfile.blog" class="card-text"><i class="fas fa-link"></i><a href="{{ users.blog }}"
+              <p *ngIf="users.blog" class="card-text"><i class="fas fa-link"></i><a href="{{ users.blog }}"
                   target="_blank"> {{ users.blog }}</a></p>
-              <p *ngIf="userProfile.email" class="card-text"><i class="fas fa-envelope-open-text"></i>
+              <p *ngIf="users.email" class="card-text"><i class="fas fa-envelope-open-text"></i>
                 {{ users.email }}</p>
-              <p *ngIf="userProfile.company" class="card-text"><i class="fas fa-briefcase"></i>
+              <p *ngIf="users.company" class="card-text"><i class="fas fa-briefcase"></i>
                 {{ users.company }}</p>
               <div class="badges">
                 <button style="color:rgb(248, 211, 0);" type="button" class="btn btn-dark btn-sm space">
