@@ -15,6 +15,7 @@ import{NgForm} from "@angular/forms"
 export class SearchComponent implements OnInit {
 users:Users
 username:string
+repoInfo=[]
 githubService:GithubRequestService
 
   constructor( githubService:GithubRequestService) {
@@ -26,7 +27,8 @@ githubService:GithubRequestService
    }
 
   ngOnInit() {
-    this.users=this.githubService.users
+    this.users=this.githubService.users;
+    this.repoInfo=this.githubService.repoDetails;
     // this.githubService.gitHubRequest()
     
     }

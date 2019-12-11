@@ -17,7 +17,7 @@ export class GithubRequestService {
 
   constructor(private http:HttpClient) { 
     this.users=new Users("","",0,0,0,"","","","","",new Date())
-    this.repository= new Repo("","","","",new Date())
+    this.repository= new Repo("","","","",new Date(),new Date())
   }
 
   gitHubRequest(username:string){
@@ -53,6 +53,27 @@ export class GithubRequestService {
     error=>{
       reject(error)
     }
+  )
+   
+   this.http.get<any>(environment.apiUrl + username + "/repos").toPromise().then(response=>{
+    for(var i=0; i<response.length; i++)
+    {
+      this.newUserData = new Repo(response[i].name,
+                                  response[i].description,
+                                  response[i].updated_at,
+                                  response[i].html_url,
+                                  response[i].language,
+                                  response[i].created_at);
+      this.repoDetails.push(this.newUserData);
+    }
+
+      resolve()
+
+  },
+  error=>{
+
+          reject(error)
+      }
   )
   })
 return promise

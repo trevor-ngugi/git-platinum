@@ -6,7 +6,7 @@
     <button type="submit" class="btn btn-info btn-lg btn-block">Search GitHub User & Repos</button>
   </form>
 
-  
+
 
 
   <!-- <form #searchField="ngForm" (ngSubmit)='searchUser()'>
@@ -68,19 +68,26 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-6">
+      <h2 >Repositories <span class="badge badge-secondary">{{ users.public_repos }}</span>
+      </h2>
+      <div *ngFor="let repo of repoInfo; ">
+        <div appCardHover class="card bottom-space">
+          <div class="card-body">
+            <h3>{{ repo.name }} <i *ngIf="repo.fork" class="fas fa-code-branch fa-xs"></i> <span
+                style="font-size:12px; float:right; color:rgb(248, 211, 0); background-color: #393c40"
+                class="badge badge-secondary">{{ repo.language }}</span></h3>
+            <p>{{ repo.description }}</p>
+            <a href="{{ repo.html_url }}" target="_blank">
+              <button style="color:rgb(248, 211, 0);" class="btn btn-dark">view on GitHub <i
+                  class="fab fa-github"></i></button>
+            </a>
+            <div class="date">
+              <small><span class="text-muted">last modified:</span> {{ repo.updated_at | datePassed }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
