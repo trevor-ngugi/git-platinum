@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import{Users} from "../user-class/users"
 import{GithubRequestService} from "../github-service/github-request.service"
+import{ HttpClient } from '@angular/common/http'; 
+import{NgForm} from "@angular/forms"
+
 
 
 
@@ -11,12 +14,15 @@ import{GithubRequestService} from "../github-service/github-request.service"
 })
 export class SearchComponent implements OnInit {
 users:Users
-  constructor(private githubService:GithubRequestService) {
+username:string
+githubService:GithubRequestService
+
+  constructor( githubService:GithubRequestService) {
     this.githubService=githubService;
    }
 
-   searchUser(){
-     this.githubService.gitHubRequest()
+   submitUsername(){
+     this.githubService.gitHubRequest(this.username);
    }
 
   ngOnInit() {

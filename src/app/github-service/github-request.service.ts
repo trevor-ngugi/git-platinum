@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment } from '../../environments/environment';
 import{Users} from "../user-class/users"
+import{Repo} from "../repo-class/repo"
 
 
 @Injectable({
@@ -10,12 +11,18 @@ import{Users} from "../user-class/users"
 export class GithubRequestService {
 
   users:Users
+  repository:Repo
+  newUserData:any=[]
+  repoDetails=[] 
 
   constructor(private http:HttpClient) { 
     this.users=new Users("","",0,0,0,"","","","","",new Date())
+    this.repository= new Repo("","","","",new Date())
   }
 
-  gitHubRequest(){
+  gitHubRequest(username:string){
+    this.repoDetails.length = 0; 
+
     interface ApiResponse{
        login:string,
        avatar_url:string,
@@ -30,12 +37,14 @@ export class GithubRequestService {
        created_at:Date
     }
   let promise=new Promise((resolve,reject)=>{
-    this.http.get<ApiResponse>(environment.apiUrl).toPromise().then(response=>{
+    this.http.get<ApiResponse>(environment.apiUrl+ username).toPromise().then(response=>{
       this.users.bio=response.bio;
       this.users.avatar_url=response.avatar_url;
       this.users.login=response.login;
       this.users.public_repos=response.public_repos;
       this.users.created_at=response.created_at;
+      this.users.followers=response.followers;
+      this.users.following=response.following;
       // this.users.updated_at=response.updated_at;
       // this.users.html_url=response.html_url;
 
