@@ -1,80 +1,100 @@
-
 <ng-progress></ng-progress>
 <div class="container">
-  <form #searchField="ngForm" (ngSubmit)='searchUser()' >
-    <div class="form-group" style="display: flex">
-      <input [(ngModel)]="users" #user="ngModel" type="text" placeholder="search github username" name="username"
-        class="form-control" id="username" style="border-right-style: none; border-radius: 0; border-color: #000" required>
-      <button (click)="searchUser()" type="submit" class="btn btn-outline-dark btn-hov"
-        style="border-left-style: none; border-radius: 0"><i class="fas fa-search" style="color: #000"></i></button>
-    </div>
-    <small [hidden]="user.untouched || user.valid || users" class="form-text" style="color: red; margin-top:0;">this
-      field is required.</small>
+  <form (ngSubmit)='submitUsername()' #gitForm='ngForm' name="gitForm">
+    <input type="text" class="form-control input-lg mb15 user-input" id="username" [(ngModel)]="username"
+      name="username" autocomplete="off" placeholder="Github Username">
+    <button type="submit" class="btn btn-info btn-lg btn-block">Search GitHub User & Repos</button>
   </form>
-</div>
-<hr class="style-one">
-<!-- <div *ngIf="notFound && !userProfile" class="mx-auto">
-  <img src="assest/error.png" alt="" class="mx-auto" height="120" width="120">
-  <h2 class="text-center">sorry, user not found <i class="far fa-frown fa-lg"></i></h2>
-</div> -->
-<div class="row">
-  <div class="col-lg-6">
-    <div *ngIf="users">
-      <h2>Profile</h2>
-      <div class="card no-border mb-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{{ users.avatar_url }}" class="card-img img-fluid" alt="avatar" width="100" height="180">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{ users.login}} <a class="redirect"  target="_blank"><i
-                    class="fab fa-github"></i></a></h5>
-              <p class="card-text"><span class="text-muted">Username:</span> {{ users.login }}</p>
-              <p *ngIf="users.bio" class="card-text"><span class="text-muted">Bio:</span> {{ users.bio }}
-              </p>
-              <p class="card-text"><span class="text-muted">Member since:</span>
-                {{ users.created_at | datePassed }}</p>
-              <p *ngIf="users.location" class="card-text"><i class="fas fa-map-marker-alt"></i>
-                {{ users.location }}</p>
-              <p *ngIf="users.blog" class="card-text"><i class="fas fa-link"></i><a href="{{ users.blog }}"
-                  target="_blank"> {{ users.blog }}</a></p>
-              <p *ngIf="users.email" class="card-text"><i class="fas fa-envelope-open-text"></i>
-                {{ users.email }}</p>
-              <p *ngIf="users.company" class="card-text"><i class="fas fa-briefcase"></i>
-                {{ users.company }}</p>
-              <div class="badges">
-                <button style="color:rgb(248, 211, 0);" type="button" class="btn btn-dark btn-sm space">
-                  Followers <span style="background-color:rgb(248, 211, 0);"
-                    class="badge badge-light">{{ users.followers }}</span>
-                </button>
-                <button style="color:rgb(248, 211, 0);" type="button" class="btn btn-dark btn-sm space">
-                  Following <span style="background-color:rgb(248, 211, 0);"
-                    class="badge badge-light">{{ users.following }}</span>
-                </button>
+
+
+
+
+  <!-- <form #searchField="ngForm" (ngSubmit)='searchUser()'>
+        <div class="form-group" style="display: flex">
+          <input [(ngModel)]="users" #user="ngModel" type="text" placeholder="search github username" name="username"
+            class="form-control" id="username" style="border-right-style: none; border-radius: 0; border-color: #000"
+            required>
+          <button (click)="searchUser()" type="submit" class="btn btn-outline-dark btn-hov"
+            style="border-left-style: none; border-radius: 0"><i class="fas fa-search" style="color: #000"></i></button>
+        </div>
+        <small [hidden]="user.untouched || user.valid || users" class="form-text" style="color: red; margin-top:0;">this
+          field is required.</small>
+      </form> 
+    </div> -->
+  <hr class="style-one">
+  <div *ngIf="notFound && !userProfile" class="mx-auto">
+    <img src="assest/error.png" alt="" class="mx-auto" height="120" width="120">
+    <h2 class="text-center">sorry, user not found <i class="far fa-frown fa-lg"></i></h2>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div *ngIf="users">
+        <h2>Profile</h2>
+        <div class="card no-border mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="{{ users.avatar_url }}" class="card-img img-fluid" alt="avatar" width="100" height="180">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ users.login}} <a class="redirect" target="_blank"><i
+                      class="fab fa-github"></i></a></h5>
+                <p class="card-text"><span class="text-muted">Username:</span> {{ users.login }}</p>
+                <p *ngIf="users.bio" class="card-text"><span class="text-muted">Bio:</span> {{ users.bio }}
+                </p>
+                <p class="card-text"><span class="text-muted">Member since:</span>
+                  {{ users.created_at | datePassed }}</p>
+                <p *ngIf="users.location" class="card-text"><i class="fas fa-map-marker-alt"></i>
+                  {{ users.location }}</p>
+                <p *ngIf="users.blog" class="card-text"><i class="fas fa-link"></i><a href="{{ users.blog }}"
+                    target="_blank"> {{ users.blog }}</a></p>
+                <p *ngIf="users.email" class="card-text"><i class="fas fa-envelope-open-text"></i>
+                  {{ users.email }}</p>
+                <p *ngIf="users.company" class="card-text"><i class="fas fa-briefcase"></i>
+                  {{ users.company }}</p>
+                <div class="badges">
+                  <button style="color:rgb(248, 211, 0);" type="button" class="btn btn-dark btn-sm space">
+                    Followers <span style="background-color:rgb(248, 211, 0);"
+                      class="badge badge-light">{{ users.followers }}</span>
+                  </button>
+                  <button style="color:rgb(248, 211, 0);" type="button" class="btn btn-dark btn-sm space">
+                    Following <span style="background-color:rgb(248, 211, 0);"
+                      class="badge badge-light">{{ users.following }}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-lg-6">
+      <h2 >Repositories <span class="badge badge-secondary">{{ users.public_repos }}</span>
+      </h2>
+      <div *ngFor="let repo of repoInfo; ">
+        <div appCardHover class="card bottom-space">
+          <div class="card-body">
+            <h3>{{ repo.name }} <i *ngIf="repo.fork" class="fas fa-code-branch fa-xs"></i> <span
+                style="font-size:12px; float:right; color:rgb(248, 211, 0); background-color: #393c40"
+                class="badge badge-secondary">{{ repo.language }}</span></h3>
+            <p>{{ repo.description }}</p>
+            <a href="{{ repo.html_url }}" target="_blank">
+              <button style="color:rgb(248, 211, 0);" class="btn btn-dark"  >view on GitHub <i
+                  class="fab fa-github"></i></button>
+            </a>
+            <h4><a href="{{repo.html_url}}" target="_blank">{{repo.created_at}}</a></h4>
+            <h4>{{repo.html_url}}</h4>
+            <div class="date">
+              <small><span class="text-muted">last modified:</span> {{ repo.updated_at | datePassed }}</small>
+            </div>
+
+
+
+            <!-- <h5>{{repo.name}}</h5>
+            <p>{{repo.language}}</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- <p>{{users.login}}</p>
-<p>{{users.avatar_url}}</p>
-<p>{{users.followers}}</p>
-<p>{{users.public_repos}}</p>
-<p>{{users.created_at}}</p> -->
+</div>
