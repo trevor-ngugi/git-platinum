@@ -9,7 +9,8 @@ export class Users {
                 public blog:string,
                 public email:string,
                 public company:string,
-                public created_at:Date
+                public created_at:Date,
+                public html_url:string
                 ){
                 
                 }
